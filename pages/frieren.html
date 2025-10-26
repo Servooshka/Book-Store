@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../size.css">
+    <link rel="stylesheet" href="../fonts.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  <!-- символы меню -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- шрифт -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet"> <!-- шрифт -->
+    <title>Провожающая в последний путь Фрирен</title>
+</head>
+<body data-product-id="frieren">
+
+    <nav id="main-menu" class="cover"></nav>
+    <script src="../js/menu.js"></script>
+
+    <div id="product-root"></div>
+    <script src="../js/products.js"></script>
+    <script src="../js/product-page.js"></script>
+    <script>
+    ProductPage.initFromPage('#product-root', PRODUCTS);
+    </script>
+
+    <footer id="main-footer" class="footer"></footer>
+    <script src="../js/footer.js"></script>
+</body>
+
+</html>
