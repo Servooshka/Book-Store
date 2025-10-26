@@ -15,24 +15,29 @@ class ProductPage {
         const h1 = document.createElement('h1');
         h1.textContent = this.product.title;
         titleNameDiv.appendChild(h1);
+
         // Создание блока с обложкой и информацией о книге
         const titleCoverPlusInfoDiv = document.createElement('div');
         titleCoverPlusInfoDiv.className = 'title-cover-plus-info';
  
         const titleCoverPlusDetailsDiv = document.createElement('div');
         titleCoverPlusDetailsDiv.className = 'title-cover-plus-details';
+
         // Создание обложки книги
         const img = document.createElement('img');
         img.className = 'title-cover';
         img.src = this.product.image;
         img.alt = 'Обложка';
+
         // Создание блока с информацией о книге
         const titleDetailsDiv = document.createElement('div');
         titleDetailsDiv.className = 'title-details';
+
         // Создание заголовка для информации о книге
         const h2Details = document.createElement('h2');
         h2Details.textContent = 'О книге';
         titleDetailsDiv.appendChild(h2Details);
+
         // Массив с информацией о книге
         const details = [
             { label: 'Категория: ', value: this.product.category.name, link: this.product.category.link },
@@ -43,6 +48,7 @@ class ProductPage {
             { label: 'Жанр: ', value: this.product.genre },
             { label: 'Автор: ', value: this.product.author },
         ];
+        
         // Добавление информации о книге
         details.forEach(detail => {
             const p = document.createElement('p');
@@ -59,23 +65,29 @@ class ProductPage {
             }
             titleDetailsDiv.appendChild(p);
         });
+
         // Добавление обложки и информации в общий блок
         titleCoverPlusDetailsDiv.appendChild(img);
         titleCoverPlusDetailsDiv.appendChild(titleDetailsDiv);
+
         // Создание блока с описанием и кнопкой "Добавить в корзину"
         const titleInfoDiv = document.createElement('div');
         titleInfoDiv.className = 'title-info';
+
         // Создание заголовка для описания
         const h2Info = document.createElement('h2');
         h2Info.textContent = 'Описание:';
         titleInfoDiv.appendChild(h2Info);
+
         // Создание абзаца с описанием
         const descriptionP = document.createElement('p');
         descriptionP.textContent = this.product.description;
         titleInfoDiv.appendChild(descriptionP);
+
         // Создание контейнера для кнопки "Добавить в корзину"
         const buyContainerDiv = document.createElement('div');
         buyContainerDiv.className = 'buy-container';
+
         // Создание кнопки "Добавить в корзину"
         const buyButton = document.createElement('button');
         buyButton.type = 'button';
@@ -84,6 +96,7 @@ class ProductPage {
         buyContainerDiv.appendChild(buyButton);
 
         titleInfoDiv.appendChild(buyContainerDiv);
+        
         // Добавление в контейнер
         titleCoverPlusInfoDiv.appendChild(titleCoverPlusDetailsDiv);
         titleCoverPlusInfoDiv.appendChild(titleInfoDiv);
