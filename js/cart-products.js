@@ -96,7 +96,7 @@ class CartProducts {
 
         const buyButton = document.createElement('button');
         buyButton.type = 'button';
-        buyButton.className = 'buy-bottom-button checkout-button';
+        buyButton.className = 'checkout-button';
         buyButton.textContent = 'Купить';
         buyButton.addEventListener('click', function() {
             // alert('Спасибо за покупку! Ваш заказ оформлен.');

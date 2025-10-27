@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  /* margin: 100px auto; */
   background-color: var(--form-bg-color);
   border-radius: 10px;
-  /* scale: 1.6; */
   padding: 10px;
+  scale: 1.6;
 }
 
 

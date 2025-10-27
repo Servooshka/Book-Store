@@ -1,9 +1,3 @@
-const books = [
-    { href: '../pages/frieren.html', img: '../images/frieren.png', alt: 'Фрирен', title: 'Провожающая в последний путь Фрирен.', price: 'Цена: 1000 руб.' },
-    { href: '../pages/1984.html', img: '../images/1984.png', alt: '1984', title: 'Джордж Оруэлл. 1984.', price: 'Цена: 1000 руб.' },
-    { href: '../pages/voina-i-mir.html', img: '../images/voina-i-mir.png', alt: 'Война и мир', title: 'Л.Толстой. Война и мир.', price: 'Цена: 1000 руб.' },
-];
-
 const container = document.getElementById("books-preview");
 
 const fragment = document.createDocumentFragment();
@@ -12,7 +6,7 @@ const box = document.createElement('div');
 box.className = 'cover';
 
 
-books.forEach(book => {
+Object.values(window.PRODUCTS).forEach(book => {
 
 
     const bookWrap = document.createElement('div');
@@ -20,11 +14,11 @@ books.forEach(book => {
 
     const a = document.createElement('a');
     a.className = 'sign';
-    a.href = book.href;
+    a.href = book.link;
 
     const img = document.createElement('img');
     img.className = 'image-cover-title';
-    img.src = book.img;
+    img.src = book.image;
     img.alt = book.alt;
 
     const info = document.createElement('div');
