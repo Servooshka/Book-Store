@@ -24,17 +24,7 @@
     <script src="../js/cart-products.js"></script>
     <script src="../js/products.js"></script>
     <script>
-    // ChangeCart.clearCart();
-    // Инициализация корзины при загрузке страницы и при изменении корзины в других вкладках
-    document.addEventListener('DOMContentLoaded', () => CartProducts.loadBasket());
-    // Обновление корзины при изменении
-    window.addEventListener('cart:updated', () => CartProducts.loadBasket());
-    // Обновление корзины при изменении в других вкладках
-    window.addEventListener('storage', (e) => {
-        if (e.key === 'cart') {
-            CartProducts.loadBasket();
-        }
-    });
+    CartProducts.loadBasket();
     </script>
 
     <footer id="main-footer" class="footer"></footer>

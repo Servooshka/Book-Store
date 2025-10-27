@@ -52,3 +52,12 @@
 .buy-remove-bottom-button:hover {
     background-color: var(--remove-button-hover-bg-color);
 }
+
+.checkout-button{
+    background-color: var(--buy-button-bg-color);
+    border-radius: 0 0 10px 10px;
+}
+
+.checkout-button:hover {
+    background-color: var(--buy-button-hover-bg-color);
+}

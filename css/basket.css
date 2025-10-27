@@ -46,3 +46,47 @@
     text-align: center;
     margin-top: 50px;
 }
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    background-color: var(--form-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+
+input {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus {
+  border-color: #50bfe6;
+  outline: none;
+}
+
+.order-button{
+  display: flex;
+  padding: 10px;
+  color: white;
+  background-color: var(--buy-button-bg-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+}
+
+.order-button:hover {
+  background-color: var(--buy-button-hover-bg-color);
+}

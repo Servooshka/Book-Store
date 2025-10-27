@@ -96,12 +96,13 @@ class CartProducts {
 
         const buyButton = document.createElement('button');
         buyButton.type = 'button';
-        buyButton.className = 'buy-bottom-button';
-        buyButton.textContent = 'Оформить заказ';
+        buyButton.className = 'buy-bottom-button checkout-button';
+        buyButton.textContent = 'Купить';
         buyButton.addEventListener('click', function() {
-            alert('Спасибо за покупку! Ваш заказ оформлен.');
-            ChangeCart.clearCart();
-            CartProducts.loadBasket();
+            // alert('Спасибо за покупку! Ваш заказ оформлен.');
+            const form = CartProducts.checkoutForm();
+            document.body.appendChild(form);
+            
         });
 
         totalElement.appendChild(buyButton);
@@ -114,5 +115,47 @@ class CartProducts {
         const cart = ChangeCart.getCart();
         const item = cart.find(item => item.productId === productId);
         return item ? item.quantity : 0;
+    }
+
+
+    static checkoutForm() {
+        // Форма оформления заказа может быть реализована здесь
+        const form = document.createElement('form');
+        form.className = 'checkout-form';
+
+        const nameLabel = document.createElement('label');
+        nameLabel.textContent = 'Имя:';
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.name = 'name';
+        nameInput.required = true;
+
+        const addressLabel = document.createElement('label');
+        addressLabel.textContent = 'Адрес:';
+        const addressInput = document.createElement('input');
+        addressInput.type = 'text';
+        addressInput.name = 'address';
+        addressInput.required = true;
+
+        const submitButton = document.createElement('button');
+        submitButton.type = 'submit';
+        submitButton.className = 'order-button';
+        submitButton.textContent = 'Оформить заказ';
+
+        form.appendChild(nameLabel);
+        form.appendChild(nameInput);
+        form.appendChild(addressLabel);
+        form.appendChild(addressInput);
+        form.appendChild(submitButton);
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Спасибо за покупку! Ваш заказ оформлен.');
+            ChangeCart.clearCart();
+            CartProducts.loadBasket();
+            document.body.removeChild(form);
+        });
+
+        return form;
     }
 }

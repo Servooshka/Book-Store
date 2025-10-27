@@ -52,9 +52,11 @@ input:focus {
 #authorization-form {
   margin: 120px auto;    
   position: relative;
-  width: 300px; 
-  height: 350px; 
-  scale: 1.6;
+  /* width: 300px;  */
+  width: 480px;
+  height: 300px;
+  /* height: 350px;  */
+  /* scale: 1.6; */
 }
 
 /* Применяем стили для анимации к самим формам */
