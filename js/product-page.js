@@ -6,7 +6,10 @@ class ProductPage {
 
     render() {
         if (!this.product) {
-            this.container.innerHTML = '<p>Товар не найден.</p>';
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'Товар не найден.';
+            this.container.innerHTML = '';
+            this.container.appendChild(emptyMessage);
             return;
         }
         // Создание блока с названием книги
@@ -91,9 +94,56 @@ class ProductPage {
         // Создание кнопки "Добавить в корзину"
         const buyButton = document.createElement('button');
         buyButton.type = 'button';
-        buyButton.className = 'buy-bottom-button';
-        buyButton.textContent = `Добавить в корзину: ${this.product.price}`;
-        buyContainerDiv.appendChild(buyButton);
+        buyButton.className = 'buy-bottom-button buy-add-to-cart-bottom-button';
+        // Добавление товара в корзину
+        buyButton.addEventListener("click", () => {
+            ChangeCart.addToCart(this.product.id);
+            // alert(`Товар "${this.product.title}" добавлен в корзину.`);
+            ProductPage.clearContainer();
+            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+        });
+
+        // Изменения кнопки на + и - при наличии товара в корзине
+        const plusItemButton = document.createElement('button');
+        plusItemButton.textContent = '+';
+        plusItemButton.className = 'buy-bottom-button buy-plus-bottom-button';
+        plusItemButton.addEventListener('click', () => {
+            ChangeCart.addToCart(this.product.id);
+            CartProducts.loadBasket();
+            ProductPage.clearContainer();
+            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+        });
+        
+        const minusItemButton = document.createElement('button');
+        minusItemButton.textContent = '-';
+        minusItemButton.className = 'buy-bottom-button buy-minus-bottom-button';
+        minusItemButton.addEventListener('click', () => {
+            ChangeCart.minusItem(this.product.id);
+            CartProducts.loadBasket();
+            ProductPage.clearContainer();
+            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+        });
+        
+        const removeItemButton = document.createElement('button');
+        removeItemButton.textContent = `Удалить. В корзине: ${CartProducts.getItemCount(this.product.id)}`;
+        removeItemButton.className = 'buy-bottom-button buy-remove-bottom-button';
+        removeItemButton.addEventListener('click', () => {
+            ChangeCart.removeFromCart(this.product.id);
+            CartProducts.loadBasket();
+            ProductPage.clearContainer();
+            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+        });
+
+
+        if (!ChangeCart.getCartItem(this.product.id)) {
+            buyButton.textContent = `Добавить в корзину: ${this.product.price}`;
+            buyContainerDiv.appendChild(buyButton);
+        } else {
+            buyContainerDiv.appendChild(minusItemButton);
+            buyContainerDiv.appendChild(removeItemButton);
+            buyContainerDiv.appendChild(plusItemButton);
+        }
+        
 
         titleInfoDiv.appendChild(buyContainerDiv);
         
@@ -103,6 +153,13 @@ class ProductPage {
 
         this.container.appendChild(titleNameDiv);
         this.container.appendChild(titleCoverPlusInfoDiv);
+
+  
+    }
+
+    static clearContainer(containerSelector = '#product-root') {
+        const container = document.querySelector(containerSelector);
+            container.innerHTML = '';
     }
 
     static initFromPage(containerSelector = '#product-root', products = {}) {

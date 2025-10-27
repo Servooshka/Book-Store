@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color: #ddf1f5;
+    --footer-bg-color: #9bcbd4;
+    --book-title-bg-color: #bebbbb2d;
+    --menu-bg-color: #333;
+    --submenu-bg-color: #444;
+    --buy-button-bg-color: #7d9b07;
+    --buy-button-hover-bg-color: #99be13;
+    --form-bg-color: #c1e9f1;
+    --remove-button-bg-color: #ff4d4d;
+    --remove-button-hover-bg-color: #ff1a1a;
+}

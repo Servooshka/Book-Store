@@ -2,8 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../colors.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../fonts.css">
+    <link rel="stylesheet" href="../basket.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  <!-- символы меню -->
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- шрифт -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- шрифт -->
@@ -16,6 +18,23 @@
     <script src="../js/menu.js"></script>
 
 
+    <div id="basket-content"></div>
+    <script src="../js/change-cart.js"></script>
+    <script src="../js/cart-products.js"></script>
+    <script src="../js/products.js"></script>
+    <script>
+    // ChangeCart.clearCart();
+    // Инициализация корзины при загрузке страницы и при изменении корзины в других вкладках
+    document.addEventListener('DOMContentLoaded', () => CartProducts.loadBasket());
+    // Обновление корзины при изменении
+    window.addEventListener('cart:updated', () => CartProducts.loadBasket());
+    // Обновление корзины при изменении в других вкладках
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'cart') {
+            CartProducts.loadBasket();
+        }
+    });
+    </script>
 
     <footer id="main-footer" class="footer"></footer>
     <script src="../js/footer.js"></script>
