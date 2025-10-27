@@ -1,0 +1,93 @@
+.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  /* margin: 100px auto; */
+  background-color: var(--form-bg-color);
+  border-radius: 10px;
+  /* scale: 1.6; */
+  padding: 10px;
+}
+
+
+.bottom-authorization-button{
+  display: flex;
+  padding: 10px;
+  background-color: var(--form-bg-color);
+  border: none;
+  border-radius: 0 0 5px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+}
+
+.top-authorization-button{
+  display: flex;
+  padding: 10px;
+  background-color: var(--form-bg-color);
+  border: none;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #a8dce5;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus {
+  border-color: #50bfe6;
+  outline: none;
+}
+
+/* Форма авторизации */
+#authorization-form {
+  margin: 120px auto;    
+  position: relative;
+  width: 300px; 
+  height: 350px; 
+  scale: 1.6;
+}
+
+/* Применяем стили для анимации к самим формам */
+.authorization-form, 
+.registration-form {
+  /* Накладываем обе формы друг на друга */
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+    
+  /* Переход */
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+}
+
+/* Изначально форма регистрации скрыта */
+.registration-form {
+    opacity: 0; 
+    visibility: hidden; 
+    pointer-events: none; /* Гарантирует, что не будет перехватывать клики */
+}
+
+/* Режим регистрации: */
+.auth-container.mode-register .authorization-form {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* 2. Показываем форму регистрации (делаем видимой и непрозрачной) */
+.auth-container.mode-register .registration-form { 
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}

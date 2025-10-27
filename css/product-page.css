@@ -1,0 +1,54 @@
+.buy-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: flex-end;
+}
+
+.buy-bottom-button {
+    display: flex;
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.3s;
+    font-size: 15px;
+    justify-content: center;
+}
+
+.buy-add-to-cart-bottom-button{
+    background-color: var(--buy-button-bg-color);
+    border-radius: 0 0 10px 10px;
+}
+
+.buy-bottom-button:hover {
+    background-color: var(--buy-button-hover-bg-color);
+}
+
+.buy-plus-bottom-button{
+    background-color: var(--buy-button-bg-color);
+    border-radius: 0 0 10px 0;
+}
+
+.buy-plus-bottom-button:hover {
+    background-color: var(--buy-button-hover-bg-color);
+}
+
+.buy-minus-bottom-button{
+    background-color: var(--buy-button-bg-color);
+    border-radius: 0 0 0 10px;
+}
+
+.buy-minus-bottom-button:hover {
+    background-color: var(--buy-button-hover-bg-color);
+}
+
+.buy-remove-bottom-button{
+    background-color: var(--remove-button-bg-color);
+    border-radius: 0;
+}
+
+.buy-remove-bottom-button:hover {
+    background-color: var(--remove-button-hover-bg-color);
+}

@@ -1,0 +1,273 @@
+
+
+.flex-container {
+    display: flex;
+}
+
+.cover {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 40px;
+    column-gap: 40px;
+}
+
+.flex-vertical {
+    margin: 0;
+    height: 120px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* Строка меню сверху страницы */
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    background-color: var(--menu-bg-color);
+    width: 100%;
+    padding-inline-start: 0px;
+    border-radius: 10px;
+}
+/* Подменю позиционируется относительно меню */
+.menu li {
+    flex-grow: 1;
+    position: relative;
+}
+/* Объекты-ссылки меню */
+.menu a {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    justify-content: space-around;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    transition: filter 0.3s;
+}
+/* Наведение на объекты меню */
+.menu a:hover{
+    filter: brightness(0.6);
+    cursor:pointer;
+}
+/* Скрытие кнопки открытия меню */
+.menu-toggle {
+    display: none; 
+}
+/* Подменю */
+.submenu {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--submenu-bg-color);
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 0 0 10px 10px;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+/* Наведение на подменю */
+.dropdown:hover .submenu{
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+/* Объекты ссылки подменю */
+.submenu a {
+    transition: filter 0.3s;
+}
+/* Наведение на объекты подменю */
+.submenu a:hover {
+    filter: brightness(0.6);
+}
+/* Объект товара */
+.book-title {
+    display: flex;
+    height: 420px;
+    width: 200px;
+    flex-direction: column;
+    background-color: var(--book-title-bg-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+/* Наведение на товар */
+.book-title:hover {
+    transform: scale(1.1);
+    filter: brightness(0.95)
+}
+/* Выравниваение текста */
+.align-text {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+/* Разделитель страницы */
+.separator {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 2px solid #062e07;
+    border-bottom: 2px solid #062e07;
+    
+}
+
+a {
+    text-decoration: none;
+    color: rgb(8, 182, 37);
+}
+
+
+
+/* Изображение объекта товара */
+.image-cover-title {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+}
+/* Подпись товара */
+.sign {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    text-decoration: none;
+}
+
+.contacts {
+    display: flex;
+    padding-left: 15px;
+    margin-top: 20px;
+}
+.contacts a {
+    display: flex;
+    padding: 15px 40px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: transform 0.3s ease-in-out;
+    max-width: fit-content;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.adress {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.adress a:hover {
+    filter: brightness(0.5);
+}
+
+/* разные цвета фонов */
+.contacts-tg a { 
+    background-color: #05abd4; 
+}
+.contacts-tel a { 
+    background-color: #179a15; 
+}
+
+
+.contacts a:hover {
+    transform: scale(1.1);
+    filter: brightness(0.95);
+}
+
+.about-us {
+    padding: 20px;
+}
+
+.about-us a:hover {
+    filter: brightness(0.5);
+}
+.title-info {
+    display: flex;
+    flex-direction: column;
+    width: min(50%, 400px);
+    background-color: #bebbbb36;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.title-info h2, p {
+    padding: 5px;
+    margin: 0;
+}
+
+.title-name {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 30px;
+}
+
+.title-cover {
+    width: min(50%, 400px);
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+.title-cover-plus-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.title-cover-plus-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.title-details {
+    display: flex;
+    flex-direction: column;
+    width: min(50%, 400px);
+    background-color: #bebbbb36;
+    border-radius: 0 10px 10px 0;
+    margin-left: auto;
+    margin-left: 0;
+}
+
+.title-details h2, p{
+    padding: 5px;
+    margin: 0;
+}
+
+.title-details span {
+    color: #00000082;
+}
+
+.title-details a:hover {
+    filter: brightness(0.5);
+}
+
+
+
+.footer {
+    display: flex;
+    text-align: left;
+    padding: 10px 0px;
+    margin-top: 50px;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: var(--footer-bg-color);
+}
+
+.footer img {
+    width: 100px;
+    height: 100px;
+    margin-right: 5px;
+}
+
+.footer p {
+    align-content: center;
+}
+
+body {
+    background-color: var(--main-bg-color);
+}
