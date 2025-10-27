@@ -17,6 +17,7 @@
 .basket-item a {
     display: inline-block; /* чтобы можно было задавать размер картинки */
     flex: 0 0 20%; 
+    max-width: 150px;
 }
 
 .basket-item button {
@@ -51,8 +52,9 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 20%;
-    left: 30%;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -60%);
     background-color: var(--form-bg-color);
     padding: 20px;
     border-radius: 10px;
@@ -75,6 +77,27 @@ input:focus {
   outline: none;
 }
 
+
+.checkout-button {
+    display: flex;
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.3s;
+    font-size: 15px;
+    background-color: var(--buy-button-bg-color);
+    border-radius: 0 0 10px 10px;
+    min-width: 240px;
+    min-height: 60px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+}
+.checkout-button:hover {
+    background-color: var(--buy-button-hover-bg-color);
+}
 .order-button{
   display: flex;
   padding: 10px;

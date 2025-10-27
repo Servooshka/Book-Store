@@ -1,0 +1,64 @@
+/* Строка меню сверху страницы */
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    background-color: var(--menu-bg-color);
+    width: 100%;
+    padding-inline-start: 0px;
+    border-radius: 10px;
+}
+/* Подменю позиционируется относительно меню */
+.menu li {
+    flex-grow: 1;
+    position: relative;
+}
+/* Объекты-ссылки меню */
+.menu a {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    justify-content: space-around;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    transition: filter 0.3s;
+}
+/* Наведение на объекты меню */
+.menu a:hover{
+    filter: brightness(0.6);
+    cursor:pointer;
+}
+/* Скрытие кнопки открытия меню */
+.menu-toggle {
+    display: none; 
+}
+/* Подменю */
+.submenu {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--submenu-bg-color);
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 0 0 10px 10px;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+/* Наведение на подменю */
+.dropdown:hover .submenu{
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+/* Объекты ссылки подменю */
+.submenu a {
+    transition: filter 0.3s;
+}
+/* Наведение на объекты подменю */
+.submenu a:hover {
+    filter: brightness(0.6);
+}

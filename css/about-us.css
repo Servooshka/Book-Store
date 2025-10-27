@@ -1,0 +1,50 @@
+.contacts {
+    display: flex;
+    padding-left: 15px;
+    margin-top: 20px;
+    justify-content: center;
+}
+.contacts a {
+    display: flex;
+    padding: 15px 40px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: transform 0.3s ease-in-out;
+    max-width: fit-content;
+    border-radius: 10px;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.adress {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    justify-content: center;
+}
+
+.adress a:hover {
+    filter: brightness(0.5);
+}
+
+/* разные цвета фонов */
+.contacts-tg a { 
+    background-color: #05abd4; 
+}
+.contacts-tel a { 
+    background-color: #179a15; 
+}
+
+
+.contacts a:hover {
+    transform: scale(1.1);
+    filter: brightness(0.95);
+}
+
+.about-us {
+    padding: 20px;
+}
+
+.about-us a:hover {
+    filter: brightness(0.5);
+}
