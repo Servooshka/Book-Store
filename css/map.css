@@ -1,0 +1,29 @@
+.map {
+    margin: 15px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--footer-bg-color);
+    overflow: hidden;
+}
+
+@media (max-width: 3000px) {
+    .map {
+        width: 99%;
+        height: 600px;
+    }
+}
+
+@media (max-width: 1800px) {
+    .map {
+        width: 99%;
+        height: 400px;
+    }
+}
+
+@media (max-width: 800px) {
+    .map {
+        width: 99%;
+        height: 300px;
+    }
+}
+
+

@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
+
+    <title>Тест карты</title>
     <link rel="stylesheet" href="../css/colors.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fonts.css">
@@ -15,6 +17,12 @@
     <nav id="main-menu" class="cover"></nav>
     <script src="../js/menu.js"></script>
 
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=5f345681-157f-4d24-bc6a-dc2862ed62a9"></script>
+    <div id="map" style="width:100%;height:500px"></div>
+    <script src="../js/map.js"></script>
+    <script>
+        ymaps.ready(init);
+    </script>
 
     <footer id="main-footer" class="footer"></footer>
     <script src="../js/footer.js"></script>
