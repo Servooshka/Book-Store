@@ -1,0 +1,36 @@
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    env_file: ./mySQL/.env
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mySQL/mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  php:
+    build:
+      context: ./php-docker # Папка с Dockerfile для PHP
+    container_name: my_php_fpm
+    volumes:
+      # Монтируем весь проект в папку /var/www/html
+      - ./:/var/www/html
+    expose:
+      - "9000"
+    depends_on:
+      - mysql-db # PHP запустится после базы данных
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: my_nginx
+    ports:
+      # Открываем порт 8080
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    restart: unless-stopped

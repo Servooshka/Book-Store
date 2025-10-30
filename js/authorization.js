@@ -2,10 +2,11 @@ const container = document.getElementById("authorization-form");
 container.classList.add("auth-container");
 
 
-
 // Создание формы авторизации
 const authForm = document.createElement("form");
 authForm.className = "authorization-form form-container";
+authForm.action = "../php/authorize.php";
+authForm.method = "POST";
 
 const title = document.createElement("h2");
 title.textContent = "Авторизация";
@@ -45,28 +46,30 @@ authForm.appendChild(registrationButton);
 // Создание формы регистрации
 const regForm = document.createElement("form");
 regForm.className = "registration-form form-container";
+regForm.action = "../php/register.php";
+regForm.method = "POST";
 
 const regTitle = document.createElement("h2");
 regTitle.textContent = "Регистрация";
 regTitle.style.textAlign = "center";
 
-const regInputMail = document.createElement("input");
-regInputMail.type = "email";
-regInputMail.placeholder = "Почта";
-regInputMail.name = "reg-mail";
-regInputMail.required = true;
+const regInputName = document.createElement("input");
+regInputName.type = "text";
+regInputName.placeholder = "Имя";
+regInputName.name = "name";
+regInputName.required = true;
 
 const regInputLogin = document.createElement("input");
 regInputLogin.type = "text";
 regInputLogin.placeholder = "Логин";
-regInputLogin.name = "reg-login";
+regInputLogin.name = "username";
 regInputLogin.minLength = 3;
 regInputLogin.required = true;
 
 const regInputPassword = document.createElement("input");
 regInputPassword.type = "password";
 regInputPassword.placeholder = "Пароль";
-regInputPassword.name = "reg-password";
+regInputPassword.name = "password";
 regInputPassword.minLength = 8;
 regInputPassword.required = true;
 
@@ -80,14 +83,68 @@ backToLoginBtn.type = "button";
 backToLoginBtn.textContent = "Есть аккаунт? Войти";
 backToLoginBtn.className = "bottom-authorization-button";
 
+
 regForm.appendChild(regTitle);
-regForm.appendChild(regInputMail);
+regForm.appendChild(regInputName);
 regForm.appendChild(regInputLogin);
 regForm.appendChild(regInputPassword);
 regForm.appendChild(regSubmitButton);
 regForm.appendChild(backToLoginBtn);
 
 
+// Обработка регистрации
+regForm.addEventListener("submit", async function(event) {
+  event.preventDefault(); // Форма не отправляется стандартным образом на сервер
+  
+  const formData = new FormData(regForm);
+  
+  try {
+    const response = await fetch('../php/register.php', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('Регистрация успешна! Теперь войдите в систему.');
+      // Возвращаемся на форму входа
+      container.classList.remove("mode-register");
+      regForm.reset();
+    } else {
+      alert('Ошибка: ' + result.message);
+    }
+  } catch (error) {
+    alert('Произошла ошибка при регистрации');
+    console.error(error);
+  }
+});
+
+// Обработка авторизации
+authForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+  
+  const formData = new FormData(authForm);
+  
+  try {
+    const response = await fetch('../php/authorize.php', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('Вход выполнен успешно!');
+      window.location.href = '../pages/account.html';
+    } else {
+      alert('Ошибка: ' + result.message);
+    }
+  } catch (error) {
+    alert('Произошла ошибка при входе');
+    console.error(error);
+  }
+});
 
 // Добавление форм в контейнер
 container.appendChild(authForm);
@@ -103,42 +160,13 @@ backToLoginBtn.addEventListener("click", () => {
 });
 
 
-
-authForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const login = inputLogin.value;
-    const password = inputPassword.value;
-
-    if (login === "user" && password === "password") {
-        alert("Авторизация успешна!");
-    } else {
-        alert("Неверный логин или пароль.");
-    }
-    authForm.reset();
-});
-
-
-regForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const email = regInputMail.value.trim();
-    const login = regInputLogin.value.trim();
-    const password = regInputPassword.value.trim();
-
-    alert("Регистрация успешна!");
-    regForm.reset();
-    container.classList.remove("mode-register");
-});
-
-
 // Создание обертки для форм
-const formsWrapper = document.createElement("div");
-formsWrapper.className = "forms-wrapper";
+// const formsWrapper = document.createElement("div");
+// formsWrapper.className = "forms-wrapper";
 
 // Добавление форм в обертку
-formsWrapper.appendChild(authForm);
-formsWrapper.appendChild(regForm);
+// formsWrapper.appendChild(authForm);
+// formsWrapper.appendChild(regForm);
 
 // Добавление обертки в основной контейнер
-container.appendChild(formsWrapper);
+// container.appendChild(formsWrapper);
