@@ -31,6 +31,19 @@
   justify-content: center;
 }
 
+
+.logout-button {
+  display: block;
+  padding: 10px;
+  background-color: var(--form-bg-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+  width: 100%;
+}
+
 button:hover {
   background-color: #a8dce5;
 }

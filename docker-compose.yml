@@ -28,8 +28,8 @@ services:
     image: nginx:latest
     container_name: my_nginx
     ports:
-      # Открываем порт 8080
-      - "8080:80"
+      # Открываем порт 80
+      - "80:80"
     volumes:
       - ./:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf

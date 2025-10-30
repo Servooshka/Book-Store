@@ -92,10 +92,13 @@ regForm.appendChild(regSubmitButton);
 regForm.appendChild(backToLoginBtn);
 
 const greetingMessageContainer = document.createElement("div");
+greetingMessageContainer.style.display = "inline-block";
+greetingMessageContainer.style.textAlign = "center";
+greetingMessageContainer.style.margin = "0 auto";
 const greetingMessage = document.createElement("h2");
 greetingMessage.className = "auth-greeting form-container";
 greetingMessage.hidden = true;
-greetingMessage.style.display = "none";
+greetingMessage.style.display = "inline-block";
 greetingMessage.style.textAlign = "center";
 greetingMessageContainer.appendChild(greetingMessage);
 
@@ -131,6 +134,57 @@ regForm.addEventListener("submit", async function(event) {
   }
 });
 
+// Функции для отображения приветствия и сброса форм
+const showGreeting = (name) => {
+  const userName = name && name.trim() ? name.trim() : "пользователь";
+  authForm.style.display = "none";
+  regForm.style.display = "none";
+  greetingMessage.textContent = `Привет, ${userName}!`;
+  greetingMessage.hidden = false;
+  greetingMessage.style.display = "block";
+};
+
+const resetForms = () => {
+  container.classList.remove("mode-register");
+  authForm.reset();
+  regForm.reset();
+  greetingMessage.hidden = true;
+  greetingMessage.style.display = "none";
+  authForm.style.display = "";
+  regForm.style.display = "";
+};
+
+const savedUser = localStorage.getItem("authUser");
+if (savedUser) {
+  showGreeting(savedUser);
+} else {
+  resetForms();
+}
+
+// Кнопка выхода из аккаунта
+const logoutButton = document.createElement("button");
+logoutButton.textContent = "Выйти из аккаунта";
+logoutButton.className = "logout-button";
+logoutButton.style.display = "block";
+logoutButton.style.width = "100%";
+logoutButton.style.borderRadius = "10px";
+logoutButton.style.backgroundColor = "var(--remove-button-bg-color)";
+logoutButton.style.border = "none";
+logoutButton.style.cursor = "pointer";
+logoutButton.style.justifyContent = "center";
+logoutButton.style.transition = "background-color 0.3s";
+logoutButton.onmouseover = () => {
+  logoutButton.style.backgroundColor = "var(--remove-button-hover-bg-color)";
+};
+logoutButton.onmouseout = () => {
+  logoutButton.style.backgroundColor = "var(--remove-button-bg-color)";
+};
+greetingMessageContainer.appendChild(logoutButton);
+
+logoutButton.addEventListener("click", () => {
+  localStorage.removeItem("authUser");
+  resetForms();
+});
 
 // Обработка авторизации
 authForm.addEventListener("submit", async function(event) {
@@ -147,14 +201,10 @@ authForm.addEventListener("submit", async function(event) {
     const result = await response.json();
     
     if (result.success) {
-      container.classList.remove("mode-register");
-      authForm.reset();
-      regForm.reset();
-      authForm.style.display = "none";
-      regForm.style.display = "none";
-      greetingMessage.textContent = `Привет, ${result.name || "пользователь"}!`;
-      greetingMessage.hidden = false;
-      greetingMessage.style.display = "block";
+      const userName = result.name || formData.get("login") || "пользователь";
+      localStorage.setItem("authUser", userName);
+      showGreeting(userName);
+      return;
     } else {
       alert('Ошибка: ' + result.message);
     }
