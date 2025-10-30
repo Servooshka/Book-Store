@@ -91,6 +91,13 @@ regForm.appendChild(regInputPassword);
 regForm.appendChild(regSubmitButton);
 regForm.appendChild(backToLoginBtn);
 
+const greetingMessageContainer = document.createElement("div");
+const greetingMessage = document.createElement("h2");
+greetingMessage.className = "auth-greeting form-container";
+greetingMessage.hidden = true;
+greetingMessage.style.display = "none";
+greetingMessage.style.textAlign = "center";
+greetingMessageContainer.appendChild(greetingMessage);
 
 // Обработка регистрации
 regForm.addEventListener("submit", async function(event) {
@@ -111,6 +118,10 @@ regForm.addEventListener("submit", async function(event) {
       // Возвращаемся на форму входа
       container.classList.remove("mode-register");
       regForm.reset();
+      authForm.reset();
+      authForm.style.display = "";
+      regForm.style.display = "";
+      greetingMessage.hidden = true;
     } else {
       alert('Ошибка: ' + result.message);
     }
@@ -119,6 +130,7 @@ regForm.addEventListener("submit", async function(event) {
     console.error(error);
   }
 });
+
 
 // Обработка авторизации
 authForm.addEventListener("submit", async function(event) {
@@ -135,8 +147,14 @@ authForm.addEventListener("submit", async function(event) {
     const result = await response.json();
     
     if (result.success) {
-      alert('Вход выполнен успешно!');
-      window.location.href = '../pages/account.html';
+      container.classList.remove("mode-register");
+      authForm.reset();
+      regForm.reset();
+      authForm.style.display = "none";
+      regForm.style.display = "none";
+      greetingMessage.textContent = `Привет, ${result.name || "пользователь"}!`;
+      greetingMessage.hidden = false;
+      greetingMessage.style.display = "block";
     } else {
       alert('Ошибка: ' + result.message);
     }
@@ -149,6 +167,7 @@ authForm.addEventListener("submit", async function(event) {
 // Добавление форм в контейнер
 container.appendChild(authForm);
 container.appendChild(regForm);
+container.appendChild(greetingMessageContainer);
 
 // Переключение между формами
 registrationButton.addEventListener("click", () => {
@@ -158,17 +177,3 @@ registrationButton.addEventListener("click", () => {
 backToLoginBtn.addEventListener("click", () => {
   container.classList.remove("mode-register");
 });
-
-
-// Создание обертки для форм
-// const formsWrapper = document.createElement("div");
-// formsWrapper.className = "forms-wrapper";
-
-// Добавление форм в обертку
-// formsWrapper.appendChild(authForm);
-// formsWrapper.appendChild(regForm);
-
-// Добавление обертки в основной контейнер
-// container.appendChild(formsWrapper);
-
-
