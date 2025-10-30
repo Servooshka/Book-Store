@@ -4,7 +4,7 @@ ul.className = "menu";
 
 const menuItems = [
     { text: "Главная", href: "../index.html" },
-    { text: "Тест", href: "../pages/test.html" },
+    // { text: "Тест", href: "../pages/test.html" },
     { text: "Аккаунт", href: "../pages/account.html" },
     {
         text: "Разделы",
