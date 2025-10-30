@@ -1,10 +1,12 @@
 services:
   mysql-db:
     image: mysql:latest
-    container_name: mysql-db
+    container_name: mysql-users-db
     env_file: ./mySQL/.env
     ports:
-      - 3306:3306
+      - 3307:3306
+    expose:
+      - "3306"
     volumes:
       - ./mySQL/mysql_data:/var/lib/mysql
     restart: unless-stopped

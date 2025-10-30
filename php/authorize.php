@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/json');
-$servername = "mysql-db";
+$servername = "mysql-users-db";
 $username = "servoo";
 $password = "servoo";
 $dbname = "my-db";
+$port = 3306;
 // echo "Подключение к базе данных...";
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 if ($conn->connect_error) { 
     echo json_encode(['success'=>false,'message'=>'Ошибка подключения к БД']); 
