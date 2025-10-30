@@ -92,13 +92,15 @@ regForm.appendChild(regSubmitButton);
 regForm.appendChild(backToLoginBtn);
 
 const greetingMessageContainer = document.createElement("div");
-greetingMessageContainer.style.display = "inline-block";
-greetingMessageContainer.style.textAlign = "center";
+greetingMessageContainer.style.display = "flex";
+greetingMessageContainer.style.flexDirection = "column";
+greetingMessageContainer.style.justifyContent = "center";
+greetingMessageContainer.style.alignItems = "center";
 greetingMessageContainer.style.margin = "0 auto";
 const greetingMessage = document.createElement("h2");
 greetingMessage.className = "auth-greeting form-container";
 greetingMessage.hidden = true;
-greetingMessage.style.display = "inline-block";
+greetingMessage.style.display = "flex";
 greetingMessage.style.textAlign = "center";
 greetingMessageContainer.appendChild(greetingMessage);
 
