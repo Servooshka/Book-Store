@@ -96,42 +96,42 @@ class ProductPage {
         buyButton.type = 'button';
         buyButton.className = 'buy-bottom-button buy-add-to-cart-bottom-button';
         // Добавление товара в корзину
-        buyButton.addEventListener("click", () => {
-            ChangeCart.addToCart(this.product.id);
+        buyButton.addEventListener("click", async () => {
+            await ChangeCart.addToCart(this.product.id);
             // alert(`Товар "${this.product.title}" добавлен в корзину.`);
             ProductPage.clearContainer();
-            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+            await ProductPage.initFromPage();
         });
 
         // Изменения кнопки на + и - при наличии товара в корзине
         const plusItemButton = document.createElement('button');
         plusItemButton.textContent = '+';
         plusItemButton.className = 'buy-bottom-button buy-plus-bottom-button';
-        plusItemButton.addEventListener('click', () => {
-            ChangeCart.addToCart(this.product.id);
+        plusItemButton.addEventListener('click', async () => {
+            await ChangeCart.addToCart(this.product.id);
             CartProducts.loadBasket();
             ProductPage.clearContainer();
-            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+            await ProductPage.initFromPage();
         });
         
         const minusItemButton = document.createElement('button');
         minusItemButton.textContent = '-';
         minusItemButton.className = 'buy-bottom-button buy-minus-bottom-button';
-        minusItemButton.addEventListener('click', () => {
-            ChangeCart.minusItem(this.product.id);
+        minusItemButton.addEventListener('click', async () => {
+            await ChangeCart.minusItem(this.product.id);
             CartProducts.loadBasket();
             ProductPage.clearContainer();
-            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+            await ProductPage.initFromPage();
         });
         
         const removeItemButton = document.createElement('button');
         removeItemButton.textContent = `Удалить. В корзине: ${CartProducts.getItemCount(this.product.id)}`;
         removeItemButton.className = 'buy-bottom-button buy-remove-bottom-button';
-        removeItemButton.addEventListener('click', () => {
-            ChangeCart.removeFromCart(this.product.id);
+        removeItemButton.addEventListener('click', async () => {
+            await ChangeCart.removeFromCart(this.product.id);
             CartProducts.loadBasket();
             ProductPage.clearContainer();
-            ProductPage.initFromPage('#product-root', window.PRODUCTS);
+            await ProductPage.initFromPage();
         });
 
 
@@ -162,7 +162,7 @@ class ProductPage {
             container.innerHTML = '';
     }
 
-    static initFromPage(containerSelector = '#product-root', products = {}) {
+    static async initFromPage(containerSelector = '#product-root') {
         const container = document.querySelector(containerSelector);
         if (!container) return;
 
@@ -174,13 +174,19 @@ class ProductPage {
             return;
         }
 
-        const product = products && products[productId];
-        if (!product) {
-            console.error('ProductPage: товар не найден в переданном объекте Products:', productId);
-            container.innerHTML = `<p>Товар "${productId}" не найден. Проверьте файл js/product-data.js — в нём должен быть глобальный объект PRODUCTS с ключом "${productId}".</p>`;
+        const response = await fetch(`../php/titles.php?id=${encodeURIComponent(productId)}`, {method: 'GET', credentials: 'same-origin'});
+        if (!response.ok) {
+            const text = await response.text();
+            container.innerHTML = `<p>Ошибка загрузки товара (${response.status}): ${text}</p>`;
             return;
         }
 
-        new ProductPage(container, product).render();
+
+        try {
+            const product = await response.json();
+            new ProductPage(container, product).render();
+        } catch (err) {
+            container.innerHTML = `<p>Ошибка: ${err.message}.</p>`;
+        }  
     }
 }

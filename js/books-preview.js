@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', async () => {
 const container = document.getElementById("books-preview");
 
 const fragment = document.createDocumentFragment();
@@ -6,7 +7,8 @@ const box = document.createElement('div');
 box.className = 'cover';
 
 
-Object.values(window.PRODUCTS).forEach(book => {
+const products = await ChangeCart.fetchProduct('all');
+products.forEach(book => {
 
 
     const bookWrap = document.createElement('div');
@@ -43,3 +45,4 @@ Object.values(window.PRODUCTS).forEach(book => {
 
 box.appendChild(fragment);
 container.appendChild(box);
+});

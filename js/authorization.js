@@ -109,31 +109,43 @@ regForm.addEventListener("submit", async function(event) {
   event.preventDefault(); // Форма не отправляется стандартным образом на сервер
   
   const formData = new FormData(regForm);
+  const response = await fetch('../php/register.php', {method: 'POST', body: formData});
   
-  try {
-    const response = await fetch('../php/register.php', {
-      method: 'POST',
-      body: formData
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      alert('Регистрация успешна! Теперь войдите в систему.');
-      // Возвращаемся на форму входа
-      container.classList.remove("mode-register");
-      regForm.reset();
-      authForm.reset();
-      authForm.style.display = "";
-      regForm.style.display = "";
-      greetingMessage.hidden = true;
-    } else {
-      alert('Ошибка: ' + result.message);
-    }
-  } catch (error) {
-    alert('Произошла ошибка при регистрации');
-    console.error(error);
+  if (response.status === 200) {
+    // Возвращаемся на форму входа
+    const text = await response.text(); 
+    console.log('Успех:', text);
+    container.classList.remove("mode-register");
+    regForm.reset();
+    authForm.reset();
+    authForm.style.display = "";
+    regForm.style.display = "";
+    greetingMessage.hidden = true;
+  } else {
+    const error = await response.text()
+    console.error('Ошибка', response.status, error);
   }
+});
+
+// Обработка авторизации
+authForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+  
+  const formData = new FormData(authForm);
+  const response = await fetch('../php/authorize.php', {method: 'POST', body: formData});
+
+  
+  if (response.status === 200) {
+    const name = (await response.text()).trim();
+    const userName = name || "пользователь";
+    localStorage.setItem("authUser", userName);
+    showGreeting(userName);
+    return;
+  } else {
+    const error = await response.text()
+    console.error('Ошибка', response.status, error);
+  }
+
 });
 
 // Функции для отображения приветствия и сброса форм
@@ -188,33 +200,7 @@ logoutButton.addEventListener("click", () => {
   resetForms();
 });
 
-// Обработка авторизации
-authForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-  
-  const formData = new FormData(authForm);
-  
-  try {
-    const response = await fetch('../php/authorize.php', {
-      method: 'POST',
-      body: formData
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      const userName = result.name || formData.get("login") || "пользователь";
-      localStorage.setItem("authUser", userName);
-      showGreeting(userName);
-      return;
-    } else {
-      alert('Ошибка: ' + result.message);
-    }
-  } catch (error) {
-    alert('Произошла ошибка при входе');
-    console.error(error);
-  }
-});
+
 
 // Добавление форм в контейнер
 container.appendChild(authForm);

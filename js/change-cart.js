@@ -13,13 +13,24 @@ class ChangeCart {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    static addToCart(productId) {
+    static async fetchProduct(productId) {
+        const response = await fetch(`../php/titles.php?id=${encodeURIComponent(productId)}`, { method: 'GET', credentials: 'same-origin' });
+
+        if (!response.ok) {
+            const text = await response.text().catch(() => response.statusText || '');
+            throw new Error(`Ошибка загрузки продукта (${response.status}): ${text}`);
+        }
+        const product = await response.json();
+        return product;
+    }
+
+    static async addToCart(productId) {
         const cart = ChangeCart.getCart();
         const item = cart.find(item => item.productId === productId);
         if (item) {
             item.quantity += 1;
         } else {
-            const product = PRODUCTS[productId];
+            const product = await ChangeCart.fetchProduct(productId);
             if (product) {
                 cart.push({
                     productId: productId,

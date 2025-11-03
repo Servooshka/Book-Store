@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 $servername = "mysql-users-db";
 $username = "servoo";
 $password = "servoo";
@@ -9,9 +9,10 @@ $port = 3306;
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 if ($conn->connect_error) {
-    echo json_encode(['success'=>false,'message'=>'Ошибка подключения к БД']);
+    http_response_code(500);
+    echo 'Ошибка подключения к БД';
     exit;
-} 
+}
 
 
 // Получение данных из формы
@@ -23,9 +24,11 @@ $sql = "INSERT INTO users (username, name, password) VALUES (?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sss", $username, $name, $password);
 if ($stmt->execute()) {
-    echo json_encode(['success' => true, 'message' => 'OK']);
+    http_response_code(200);
+    echo 'Данные сохранены';
 } else {
-    echo json_encode(['success' => false, 'message' => $stmt->error]);
+    http_response_code(400);
+    echo 'Ошибка: ' . $stmt->error;
 }
 $stmt->close();
 $conn->close();
