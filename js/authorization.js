@@ -139,7 +139,8 @@ authForm.addEventListener("submit", async function(event) {
     const name = (await response.text()).trim();
     const userName = name || "пользователь";
     localStorage.setItem("authUser", userName);
-    showGreeting(userName);
+    window.dispatchEvent(new Event("userLogin"));
+    window.location.href = "../index.html";
     return;
   } else {
     const error = await response.text()
@@ -150,6 +151,7 @@ authForm.addEventListener("submit", async function(event) {
 
 // Функции для отображения приветствия и сброса форм
 const showGreeting = (name) => {
+  
   const userName = name && name.trim() ? name.trim() : "пользователь";
   authForm.style.display = "none";
   regForm.style.display = "none";
@@ -197,9 +199,15 @@ greetingMessageContainer.appendChild(logoutButton);
 
 logoutButton.addEventListener("click", () => {
   localStorage.removeItem("authUser");
+  window.dispatchEvent(new Event('userLogout'));
   resetForms();
 });
-
+// Доступ к кнопке в других файлах
+window.logoutUser = () => {
+  localStorage.removeItem("authUser");
+  window.dispatchEvent(new Event('userLogout'));
+  resetForms();
+};
 
 
 // Добавление форм в контейнер
@@ -215,3 +223,5 @@ registrationButton.addEventListener("click", () => {
 backToLoginBtn.addEventListener("click", () => {
   container.classList.remove("mode-register");
 });
+
+
