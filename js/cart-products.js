@@ -150,7 +150,7 @@ class CartProducts {
 
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-            alert('Спасибо за покупку! Ваш заказ оформлен.');
+            // alert('Спасибо за покупку! Ваш заказ оформлен.');
             ChangeCart.clearCart();
             CartProducts.loadBasket();
             document.body.removeChild(form);
