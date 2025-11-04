@@ -77,8 +77,3 @@ class ChangeCart {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if ((document.getElementById('basket-content')) && typeof ChangeCart !== 'undefined') {
-        ChangeCart.loadBasket();
-    }
-});

@@ -119,20 +119,22 @@ class CartProducts {
 
 
     static checkoutForm() {
-        // Форма оформления заказа может быть реализована здесь
         const form = document.createElement('form');
         form.className = 'checkout-form';
 
-        const nameLabel = document.createElement('label');
-        nameLabel.textContent = 'Имя:';
         const nameInput = document.createElement('input');
         nameInput.type = 'text';
         nameInput.name = 'name';
-        nameInput.required = true;
+        if (localStorage.getItem("authUser")) {
+            nameInput.readOnly = true;
+            nameInput.value = localStorage.getItem("authUser");
+        } else {
+            nameInput.placeholder = 'Имя';
+            nameInput.required = true;
+        }
 
-        const addressLabel = document.createElement('label');
-        addressLabel.textContent = 'Адрес:';
         const addressInput = document.createElement('input');
+        addressInput.placeholder = 'Адрес'
         addressInput.type = 'text';
         addressInput.name = 'address';
         addressInput.required = true;
@@ -142,9 +144,7 @@ class CartProducts {
         submitButton.className = 'order-button';
         submitButton.textContent = 'Оформить заказ';
 
-        form.appendChild(nameLabel);
         form.appendChild(nameInput);
-        form.appendChild(addressLabel);
         form.appendChild(addressInput);
         form.appendChild(submitButton);
 

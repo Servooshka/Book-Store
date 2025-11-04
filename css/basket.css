@@ -59,7 +59,7 @@
     padding: 20px;
     border-radius: 10px;
     width: 300px;
-    height: 200px;
+    height: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
@@ -98,7 +98,7 @@ input:focus {
 .checkout-button:hover {
     background-color: var(--buy-button-hover-bg-color);
 }
-.order-button{
+/* .order-button{
   display: flex;
   padding: 10px;
   color: white;
@@ -108,8 +108,20 @@ input:focus {
   cursor: pointer;
   transition: background-color 0.3s;
   justify-content: center;
+} */
+
+
+.order-button {
+  display: flex;
+  padding: 10px;
+  background-color: var(--form-bg-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
 }
 
 .order-button:hover {
-  background-color: var(--buy-button-hover-bg-color);
+  background-color: #a8dce5;
 }
