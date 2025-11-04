@@ -209,6 +209,10 @@ window.logoutUser = () => {
   resetForms();
 };
 
+window.addEventListener('userLogout', () => {
+  resetForms();
+});
+
 
 // Добавление форм в контейнер
 container.appendChild(authForm);
