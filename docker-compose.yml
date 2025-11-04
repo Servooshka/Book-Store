@@ -10,6 +10,8 @@ services:
     volumes:
       - ./mySQL/mysql_data:/var/lib/mysql
     restart: unless-stopped
+    networks:
+      - docker-direct
 
   php:
     build:
@@ -36,3 +38,7 @@ services:
     depends_on:
       - php
     restart: unless-stopped
+
+networks:
+  docker-direct:
+    external: true
