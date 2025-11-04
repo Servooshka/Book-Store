@@ -25,6 +25,8 @@ services:
     depends_on:
       - mysql-db # PHP запустится после базы данных
     restart: unless-stopped
+    networks:
+      - docker-direct
 
   nginx:
     image: nginx:latest
@@ -38,6 +40,8 @@ services:
     depends_on:
       - php
     restart: unless-stopped
+    networks:
+      - docker-direct
 
 networks:
   docker-direct:
